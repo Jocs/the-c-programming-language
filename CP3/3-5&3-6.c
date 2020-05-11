@@ -30,10 +30,32 @@ void itob(int n, char s[], int b /* 2, 8, 16 */) {
   reverse(s);
 }
 
+void itoa(int n, char s[], int b) {
+  int i = 0;
+  int sign = n > 0 ? 1 : -1;
+  if (sign < 0) {
+    n = -n;
+  }
+
+  do {
+    s[i++] = n % 10 + '0';
+  } while ((n = n / 10) > 0);
+
+  if (sign < 0) {
+    s[i++] = '-';
+  }
+
+  while (i < b) {
+    s[i++] = ' ';
+  }
+  s[i] = '\0';
+  reverse(s);
+}
+
 int main() {
-  int num = 29;
+  int num = -29;
   char s[10];
-  itob(num, s, 2);
+  itoa(num, s, 8);
 
   printf("The result is %s\n", s);
 }
